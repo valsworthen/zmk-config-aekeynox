@@ -24,8 +24,11 @@
 
 // first row
 #define S_CARET &kp CARET
-#define S_LT    &kp NUBS
-#define S_GT    &kp PIPE2
+// Use right alt (RA) to benefit from Kalamine mappings:
+// in QWERTY-Lafayette, which is the keyboard setup defined at the software level,
+// < and > are produced with RAlt W and RAlt E
+#define S_LT    &kp RA(W)
+#define S_GT    &kp RA(E)
 #define S_DLLR  &kp DLLR
 #define S_PRCNT &kp PRCNT
 #define S_AT    &kp AT
