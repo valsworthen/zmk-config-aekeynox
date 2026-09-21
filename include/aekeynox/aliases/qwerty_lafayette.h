@@ -23,6 +23,7 @@
  */
 
 // first row
+// ^<>$% @&*'`
 #define S_CARET &kp CARET
 // Use right alt (RA) to benefit from Kalamine mappings:
 // in QWERTY-Lafayette, which is the keyboard setup defined at the software level,
@@ -31,13 +32,14 @@
 #define S_GT    &kp RA(E)
 #define S_DLLR  &kp DLLR
 #define S_PRCNT &kp PRCNT
-#define S_AT    &kp AT
+#define S_AT    &kp RA(Y)
 #define S_AMPS  &kp AMPS
 #define S_STAR  &kp STAR
 #define S_SQT   &kp SQT
 #define S_GRAVE &kp GRAVE
 
 // second row
+// {()}= \+-/"
 #define S_LBRC  &kp LBRC
 #define S_LPAR  &kp RA(S)
 #define S_RPAR  &kp RA(D)
@@ -50,11 +52,12 @@
 #define S_DQT   &kp DQT
 
 // third row
+// ~[]_# |!;:?
 #define S_TILDE &kp TILDE
 #define S_LBKT  &kp LBKT
 #define S_RBKT  &kp RBKT
 #define S_UNDER &kp UNDER
-#define S_HASH  &kp HASH
+#define S_HASH  &kp RA(B)
 #define S_PIPE  &kp PIPE
 #define S_EXCL  &kp RA(M)
 #define S_SEMI  &kp LS(COMMA)
