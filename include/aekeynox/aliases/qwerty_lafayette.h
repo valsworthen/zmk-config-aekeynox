@@ -39,8 +39,8 @@
 
 // second row
 #define S_LBRC  &kp LBRC
-#define S_LPAR  &kp LPAR
-#define S_RPAR  &kp RPAR
+#define S_LPAR  &kp RA(S)
+#define S_RPAR  &kp RA(D)
 #define S_RBRC  &kp RBRC
 #define S_EQUAL &kp EQUAL
 #define S_BSLH  &kp BSLH
@@ -56,7 +56,7 @@
 #define S_UNDER &kp UNDER
 #define S_HASH  &kp HASH
 #define S_PIPE  &kp PIPE
-#define S_EXCL  &kp EXCL
+#define S_EXCL  &kp RA(M)
 #define S_SEMI  &kp LS(COMMA)
 #define S_COLON &kp LS(DOT)
 #define S_QMARK &kp QMARK
