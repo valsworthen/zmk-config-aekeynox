@@ -23,21 +23,26 @@
  */
 
 // first row
+// ^<>$% @&*'`
 #define S_CARET &kp CARET
-#define S_LT    &kp NUBS
-#define S_GT    &kp PIPE2
+// Use right alt (RA) to benefit from Kalamine mappings:
+// in QWERTY-Lafayette, which is the keyboard setup defined at the software level,
+// < and > are produced with RAlt W and RAlt E
+#define S_LT    &kp RA(W)
+#define S_GT    &kp RA(E)
 #define S_DLLR  &kp DLLR
 #define S_PRCNT &kp PRCNT
-#define S_AT    &kp AT
+#define S_AT    &kp RA(Y)
 #define S_AMPS  &kp AMPS
 #define S_STAR  &kp STAR
 #define S_SQT   &kp SQT
 #define S_GRAVE &kp GRAVE
 
 // second row
+// {()}= \+-/"
 #define S_LBRC  &kp LBRC
-#define S_LPAR  &kp LPAR
-#define S_RPAR  &kp RPAR
+#define S_LPAR  &kp RA(S)
+#define S_RPAR  &kp RA(D)
 #define S_RBRC  &kp RBRC
 #define S_EQUAL &kp EQUAL
 #define S_BSLH  &kp BSLH
@@ -47,13 +52,14 @@
 #define S_DQT   &kp DQT
 
 // third row
+// ~[]_# |!;:?
 #define S_TILDE &kp TILDE
 #define S_LBKT  &kp LBKT
 #define S_RBKT  &kp RBKT
 #define S_UNDER &kp UNDER
-#define S_HASH  &kp HASH
+#define S_HASH  &kp RA(B)
 #define S_PIPE  &kp PIPE
-#define S_EXCL  &kp EXCL
+#define S_EXCL  &kp RA(M)
 #define S_SEMI  &kp LS(COMMA)
 #define S_COLON &kp LS(DOT)
 #define S_QMARK &kp QMARK

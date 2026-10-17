@@ -58,14 +58,27 @@
   #define H4 kp
 #endif
 
+
 /**
  * Thumb Keys
  */
 
-#ifdef ENABLE_MOD_HOLD_NAVIGATION
-  #define NAV_SC &mhsc
+/ {
+  behaviors {
+    MOD_HOLD_1(mhmo, &mo, 0xff)
+    MOD_HOLD_2(mhsc, &sc, 0xff)
+    MOD_HOLD_2(mhlt, &lt, 0xff)
+  };
+};
+
+#ifdef ENABLE_MOD_HOLDS
+  #define MHMO mhmo
+  #define MHSC mhsc
+  #define MHLT mhlt
 #else
-  #define NAV_SC &sc
+  #define MHMO mo
+  #define MHSC sc
+  #define MHLT lt
 #endif
 
 #ifdef CALLUM_NAVIGATION
@@ -97,24 +110,24 @@
 #ifdef LHAND_SPACE
   #define LTHUMB_TT  &hrm CTL_CMD SPACE
   #define RTHUMB_TT  &magic_backspace
-  #define LTHUMB_HRM &lt NAV_LAYER SPACE
+  #define LTHUMB_HRM &MHLT NAV_LAYER SPACE
   #define RTHUMB_HRM &magic_backspace
-  #define LTHUMB_S34 &lt NAV_LAYER SPACE
+  #define LTHUMB_S34 &MHLT NAV_LAYER SPACE
   #define RTHUMB_S34 &magic_backspace_34_keys
 #else
   #define LTHUMB_TT  &mt CTL_CMD BACKSPACE
   #define RTHUMB_TT  &magic_space
-  #define LTHUMB_HRM NAV_SC NAV_LAYER BACKSPACE
-  #define RTHUMB_HRM &lt NAV_LAYER SPACE
-  #define LTHUMB_S34 NAV_SC NAV_LAYER BACKSPACE
-  #define RTHUMB_S34 &lt S34_LAYER SPACE
+  #define LTHUMB_HRM &MHSC NAV_LAYER BACKSPACE
+  #define RTHUMB_HRM &MHLT NAV_LAYER SPACE
+  #define LTHUMB_S34 &MHSC NAV_LAYER BACKSPACE
+  #define RTHUMB_S34 &MHLT S34_LAYER SPACE
 #endif
 
 #ifdef HT_NONE
   #define LTHUMB_TUCK   &kp ALT_CTL
   #define LTHUMB_HOME   &kp CTL_CMD
   #define LTHUMB_REACH  &kp GUI_OPT
-  #define RTHUMB_REACH  &mo NAV_LAYER
+  #define RTHUMB_REACH  &MHMO NAV_LAYER
   #define RTHUMB_HOME   &kp SPACE
   #define RTHUMB_TUCK   &mo SYMBOLS_LAYER
 #elifdef HT_THUMB_TAPS
@@ -127,24 +140,39 @@
 #elif defined HT_HOME_ROW_MODS || defined HT_CALLUM_MODS
   #define LTHUMB_TUCK   &shift_caps
   #define LTHUMB_HOME   LTHUMB_HRM
-  #define LTHUMB_REACH  &sc HRM_LAYER REACH_TAP
-  #define RTHUMB_REACH  &sc HRM_LAYER ENTER
+  #define LTHUMB_REACH  &MHSC FN_MEDIA_LAYER REACH_TAP
+  #define RTHUMB_REACH  &MHSC HRM_LAYER ENTER
   #define RTHUMB_HOME   RTHUMB_HRM
   #define RTHUMB_TUCK   &sym_shift_altgr
 #elif defined HT_TWO_THUMB_KEYS || defined HT_CALLUM_MODS_2TK
   #define LTHUMB_TUCK   &mt LSHIFT REACH_TAP
   #define LTHUMB_HOME   LTHUMB_S34
   #define LTHUMB_REACH  LTHUMB_TUCK
-  #define RTHUMB_REACH  &sc SYMBOLS_LAYER ENTER
+  #define RTHUMB_REACH  &MHSC SYMBOLS_LAYER ENTER
   #define RTHUMB_HOME   RTHUMB_S34
   #define RTHUMB_TUCK   RTHUMB_REACH
+#elifdef HT_ARSENIK
+  #define LTHUMB_TUCK   &mt LSHIFT BACKSPACE
+  #define LTHUMB_HOME   &none
+  #define LTHUMB_REACH  &none
+  #define RTHUMB_REACH  &none
+  #define RTHUMB_HOME   &MHLT NAV_LAYER SPACE
+  #define RTHUMB_TUCK   &sc SYMBOLS_LAYER ENTER
 #endif
 
-// nav_num layer thumb cluster
-#ifdef HT_TWO_THUMB_KEYS
-  #define NAV_LTHUMB_TUCK   &kp LS(TAB)
+// nav layers' thumb keys
+#ifdef HT_ARSENIK
+  #define NAV_LTHUMB_TUCK  &mt LSHIFT DEL
+  #define VIM_LTHUMB_TUCK  NAV_LTHUMB_TUCK
+  #define NAV_RTHUMB_TUCK  &mo FN_MEDIA_LAYER
+#elifdef HT_TWO_THUMB_KEYS
+  #define NAV_LTHUMB_TUCK  &kp LS(TAB)
+  #define VIM_LTHUMB_TUCK  &mt LSHIFT CAPSLOCK
+  #define NAV_RTHUMB_TUCK  &EZ_LSK(RALT)
 #else
-  #define NAV_LTHUMB_TUCK   &mt LSHIFT CAPSLOCK
+  #define NAV_LTHUMB_TUCK  &mt LSHIFT CAPSLOCK
+  #define VIM_LTHUMB_TUCK  NAV_LTHUMB_TUCK
+  #define NAV_RTHUMB_TUCK  &EZ_LSK(RALT)
 #endif
 
 
@@ -239,21 +267,21 @@
     OMIT_IF_NO_REF magic_backspace: magic_backspace {
       compatible = "zmk,behavior-mod-morph";
       #binding-cells = <0>;
-      bindings = <&sc NAV_LAYER BACKSPACE>, <&lt NAV_LAYER SPACE>;
+      bindings = <&MHSC NAV_LAYER BACKSPACE>, <&MHLT NAV_LAYER SPACE>;
       mods      = <MOD_LSFT>;
       keep-mods = <MOD_LSFT>;
     };
     OMIT_IF_NO_REF magic_space: magic_space {
       compatible = "zmk,behavior-mod-morph";
       #binding-cells = <0>;
-      bindings = <&lt NAV_LAYER SPACE>, <&sc NAV_LAYER BACKSPACE>;
+      bindings = <&MHLT NAV_LAYER SPACE>, <&MHSC NAV_LAYER BACKSPACE>;
       mods      = <MOD_LCTL>;
       keep-mods = <MOD_LCTL>;
     };
     OMIT_IF_NO_REF magic_backspace_34_keys: magic_backspace_34_keys {
       compatible = "zmk,behavior-mod-morph";
       #binding-cells = <0>;
-      bindings = <&sc HRM_LAYER BACKSPACE>, <&lt HRM_LAYER SPACE>;
+      bindings = <&MHSC HRM_LAYER BACKSPACE>, <&MHLT HRM_LAYER SPACE>;
       mods      = <MOD_LSFT>;
       keep-mods = <MOD_LSFT>;
     };
@@ -324,7 +352,5 @@
       mods      = <(MOD_LALT|MOD_LGUI)>;
       keep-mods = <(MOD_LALT|MOD_LGUI)>;
     };
-
-    MOD_HOLD_2(mhsc, &sc, MOD_LALT)
   };
 };
